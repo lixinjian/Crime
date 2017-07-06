@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginLeft="16dp"
+              android:layout_marginRight="16dp"
+              android:orientation="vertical">
+
+    <TextView
+        style="@style/bigTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="标题"/>
+
+    <EditText
+        android:id="@+id/crime_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/crime_title_hint"/>
+
+    <TextView
+        style="@style/bigTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="详情"/>
+
+    <Button
+        android:id="@+id/crime_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <CheckBox
+        android:id="@+id/crime_solved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Solved"/>
+
+</LinearLayout>
