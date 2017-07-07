@@ -14,10 +14,13 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.ds365.crime.R;
+import com.ds365.crime.activity.CrimeActivity;
 import com.ds365.crime.model.Crime;
+import com.ds365.crime.model.CrimeLab;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.UUID;
 
 /**
  * Created by Administrator on 2017/7/6 0006.
@@ -29,6 +32,15 @@ public class CrimeFragment extends Fragment {
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSelovedCheckBox;
+
+    private static final String ARG_CRIME_ID = "crime_id";
+    public static CrimeFragment newInstance(UUID crimeId) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_CRIME_ID, crimeId);
+        CrimeFragment fragment = new CrimeFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     /**
      * 创建视图用此回调
@@ -46,28 +58,32 @@ public class CrimeFragment extends Fragment {
         mTitleField = view.findViewById(R.id.crime_title);
         mDateButton = view.findViewById(R.id.crime_date);
         mSelovedCheckBox = view.findViewById(R.id.crime_solved);
-//        mTitleField.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                mCrime.setTitle(charSequence.toString());
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {}
-//        });
-//
-//        mSelovedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                mCrime.setSolved(b);
-//            }
-//        });
+
         mTitleField.setText(mCrime.getTitle());
+
         DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");
         mDateButton.setText(dateFormater.format(mCrime.getDate()));
+
+        mSelovedCheckBox.setChecked(mCrime.isSolved());
+        mTitleField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                mCrime.setTitle(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+
+        mSelovedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                mCrime.setSolved(b);
+            }
+        });
         return view;
     }
 
@@ -78,9 +94,9 @@ public class CrimeFragment extends Fragment {
      */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        mCrime = new Crime();
 
+        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
+        mCrime = CrimeLab.getCrimeLab(getActivity()).getCrime(crimeId);
     }
 }
