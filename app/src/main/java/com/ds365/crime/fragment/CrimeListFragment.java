@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ds365.crime.R;
-import com.ds365.crime.activity.CrimeActivity;
 import com.ds365.crime.activity.CrimePagerActivity;
 import com.ds365.crime.adapter.CrimeAdapter;
 import com.ds365.crime.model.Crime;
@@ -90,7 +89,6 @@ public class CrimeListFragment extends Fragment {
             public void onClick(View view, int position) {
                 selectPosition = position;
                 Toast.makeText(getActivity(), "点了第" + position + "行", Toast.LENGTH_SHORT).show();
-//                Intent intent = CrimeActivity.newIntent(getActivity(), mCrimes.get(position).getId());
 
                 Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrimes.get(position).getId());
 
