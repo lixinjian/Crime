@@ -14,7 +14,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.ds365.crime.R;
-import com.ds365.crime.activity.CrimeActivity;
 import com.ds365.crime.model.Crime;
 import com.ds365.crime.model.CrimeLab;
 
@@ -34,6 +33,7 @@ public class CrimeFragment extends Fragment {
     private CheckBox mSelovedCheckBox;
 
     private static final String ARG_CRIME_ID = "crime_id";
+
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_CRIME_ID, crimeId);

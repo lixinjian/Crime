@@ -1,6 +1,7 @@
 package com.ds365.crime.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ds365.crime.R;
+import com.ds365.crime.activity.CrimePagerActivity;
 import com.ds365.crime.model.Crime;
 
 import java.util.List;
