@@ -30,12 +30,15 @@ public class CrimePagerActivity extends FragmentActivity {
     private ViewPager mViewPager;
     private List<Crime> mCrimes;
 
+    //    @Override
+//    public void onCreate( Bundle savedInstanceState, PersistableBundle persistentState) {
+//        super.onCreate(savedInstanceState, persistentState);
     @Override
-    public void onCreate( Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crime_pager);
 
-        UUID crimeId = (UUID) getIntent() .getSerializableExtra(EXTRA_CRIME_ID);
+        UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
         mViewPager = findViewById(R.id.activity_crime_pager_viewpager);
         mCrimes = CrimeLab.getCrimeLab(this).getCrimes();
         FragmentManager fragmentManager = getSupportFragmentManager();
