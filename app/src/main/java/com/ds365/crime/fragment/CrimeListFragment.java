@@ -30,27 +30,18 @@ import java.util.List;
 public class CrimeListFragment extends Fragment {
 
     private RecyclerView mCrimeList;
-
     private CrimeAdapter mCrimeAdapter;
-
     private List<Crime> mCrimes;
-
     private static final int REQUEST_CRIME = 1;
-
     private int selectPosition = -1;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
-
         mCrimeList = view.findViewById(R.id.crime_list);
-
         mCrimeList.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         updateUI();
-
         return view;
     }
 
@@ -74,7 +65,6 @@ public class CrimeListFragment extends Fragment {
             }
         }
 
-
         //必须写此句话,设置recycleView的模式
 //        RecyclerView.LayoutManager,这是一个抽象类，好在系统提供了3个实现类：
 //        LinearLayoutManager 现行管理器，支持横向、纵向。
@@ -88,10 +78,7 @@ public class CrimeListFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 selectPosition = position;
-                Toast.makeText(getActivity(), "点了第" + position + "行", Toast.LENGTH_SHORT).show();
-
                 Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrimes.get(position).getId());
-
 //                startActivityForResult(intent, REQUEST_CRIME);
                 getActivity().startActivity(intent);
             }
@@ -99,11 +86,11 @@ public class CrimeListFragment extends Fragment {
 
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == REQUEST_CRIME) {
-//
-//        }
-//    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CRIME) {
+
+        }
+    }
 }

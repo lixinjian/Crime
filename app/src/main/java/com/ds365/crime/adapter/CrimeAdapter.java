@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class CrimeAdapter extends RecyclerView.Adapter<CrimeAdapter.CrimeHolder>
     private Context mContext;
     private List<Crime> mCrimes;
     private MyItemClickListener mListener;
+
     public CrimeAdapter(Context context, List<Crime> crimes) {
         mContext = context;
         mCrimes = crimes;
@@ -36,16 +38,29 @@ public class CrimeAdapter extends RecyclerView.Adapter<CrimeAdapter.CrimeHolder>
 
         CrimeHolder crimeHolder = new CrimeHolder(LayoutInflater.from(
                 mContext).inflate(R.layout.list_item_crime, parent,
-                false),mListener);
+                false), mListener);
 
         return crimeHolder;
     }
 
     @Override
-    public void onBindViewHolder(CrimeHolder holder, final int position) {
+    public void onBindViewHolder(final CrimeHolder holder, final int position) {
         holder.mCheckBox.setChecked(mCrimes.get(position).isSolved());
         holder.mDate.setText(mCrimes.get(position).getDate().toString());
         holder.mTitle.setText(mCrimes.get(position).getTitle());
+
+        holder.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    holder.mCheckBox.setChecked(true);
+                    mCrimes.get(position).setSolved(true);
+                } else if (!b) {
+                    holder.mCheckBox.setChecked(false);
+                    mCrimes.get(position).setSolved(false);
+                }
+            }
+        });
     }
 
     @Override
@@ -60,7 +75,7 @@ public class CrimeAdapter extends RecyclerView.Adapter<CrimeAdapter.CrimeHolder>
         TextView mDate;
         RelativeLayout mItem;
 
-        public CrimeHolder(final View itemView,MyItemClickListener itemClickListener) {
+        public CrimeHolder(final View itemView, MyItemClickListener itemClickListener) {
             super(itemView);
             mListener = itemClickListener;
             itemView.setOnClickListener(this);
@@ -72,7 +87,7 @@ public class CrimeAdapter extends RecyclerView.Adapter<CrimeAdapter.CrimeHolder>
 
         @Override
         public void onClick(View view) {
-            mListener.onClick(view,getPosition());
+            mListener.onClick(view, getPosition());
         }
     }
 
@@ -80,7 +95,7 @@ public class CrimeAdapter extends RecyclerView.Adapter<CrimeAdapter.CrimeHolder>
         void onClick(View view, int position);
     }
 
-    public void setItemClickListener(MyItemClickListener itemClickListener){
+    public void setItemClickListener(MyItemClickListener itemClickListener) {
         mListener = itemClickListener;
     }
 
