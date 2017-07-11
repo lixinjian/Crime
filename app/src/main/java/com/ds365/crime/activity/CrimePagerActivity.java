@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.ds365.crime.R;
@@ -24,7 +25,7 @@ import java.util.UUID;
  * Created by Administrator on 2017/7/10 0010.
  */
 
-public class CrimePagerActivity extends FragmentActivity {
+public class CrimePagerActivity extends AppCompatActivity {
     private static final String EXTRA_CRIME_ID =
             "com.bignerdranch.android.criminalintent.crime_id";
     private ViewPager mViewPager;
@@ -36,10 +37,12 @@ public class CrimePagerActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mViewPager = new ViewPager(CrimePagerActivity.this);
         setContentView(R.layout.activity_crime_pager);
 
         UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
-        mViewPager = findViewById(R.id.activity_crime_pager_viewpager);
+        mViewPager = (ViewPager) findViewById(R.id.activity_crime_pager_viewpager);
         mCrimes = CrimeLab.getCrimeLab(this).getCrimes();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
