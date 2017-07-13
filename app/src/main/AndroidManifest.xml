@@ -2,6 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.ds365.crime">
 
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18"
+        />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false"
+        />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.CrimePagerActivity"/>
+        <activity
+            android:name=".activity.CrimePagerActivity"
+            android:parentActivityName=".activity.CrimeListActivity"/>
     </application>
 
 </manifest>
