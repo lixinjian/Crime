@@ -232,6 +232,13 @@ public class CrimeFragment extends Fragment {
                 .updateCrime(mCrime);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        CrimeLab.getCrimeLab(getActivity())
+                .updateCrime(mCrime);
+    }
+
     private void updateDate() {
         DateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");
         mDateButton.setText(dateFormater.format(mCrime.getDate()));
