@@ -1,6 +1,7 @@
 package com.ds365.crime.fragment;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -151,10 +152,9 @@ public class CrimeFragment extends Fragment {
             mSuspectButton.setEnabled(false);
         }
 
-
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         boolean canTakePhoto = mPhotoFile != null && captureImage.resolveActivity(packageManager) != null;
-        mPhotoButton.setEnabled(canTakePhoto);
+//        mPhotoButton.setEnabled(canTakePhoto);
         if (canTakePhoto) {
             Uri uri = Uri.fromFile(mPhotoFile);
             captureImage.putExtra(MediaStore.EXTRA_OUTPUT, uri);
@@ -162,6 +162,7 @@ public class CrimeFragment extends Fragment {
         mPhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Android N 版本在此会报异常,android.os.FileUriExposedException,导致不能调用相机,没解决啊!!!
                 startActivityForResult(captureImage, REQUEST_PHOTO);
             }
         });
